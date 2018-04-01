@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="net.hncu.hcq.domain">
+
+	<class name="Grade" table="graduation_grade">
+		<id name="id">
+			<generator class="native" />
+		</id>
+
+		<property name="open_grade" />
+		<property name="middle_grade" />
+		<property name="thesis1_grade" />
+		<property name="thesis2_grade" />
+		<property name="thesis3_grade" />
+		<property name="thesis4_grade" />
+		<property name="thesis5_grade" />
+		<property name="thesis6_grade" />
+		<property name="thesis7_grade" />
+		<property name="thesis8_grade" />
+		<property name="thesis9_grade" />
+		<property name="thesis10_grade" />
+		<property name="thesis11_grade" />
+		<property name="thesis12_grade" />
+		<property name="thesis13_grade" />
+		<property name="thesis14_grade" />
+		<property name="thesis15_grade" />
+		<property name="thesis16_grade" />
+		<property name="thesis17_grade" />
+		<property name="thesis18_grade" />
+		<property name="thesis19_grade" />
+		<property name="thesis20_grade" />
+		<property name="thesis21_grade" />
+		<property name="defence_grade" />
+		
+		<property name="total_grade" />
+
+
+
+
+		<!-- course属性，本类与Course的一对一 -->
+		<one-to-one name="course" class="Course"></one-to-one>
+
+
+	</class>
+
+</hibernate-mapping>

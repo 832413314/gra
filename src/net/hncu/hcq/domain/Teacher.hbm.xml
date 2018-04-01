@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="net.hncu.hcq.domain">
+
+	<class name="Teacher" table="graduation_teacher" dynamic-insert="true"
+		dynamic-update="true">
+		<id name="id">
+			
+			<!-- 不自动增长 <generator class="native" /> -->
+			
+		</id>
+		<property name="name" />
+		<property name="password" />
+		<property name="courseNumber" />
+		<property name="description" />
+		<property name="phone" />
+		<property name="email" />
+		<property name="sex" />
+		
+		
+		<!-- students属性，本类与Student的一对多 -->
+		<set name="students">
+			<key column="teacher"></key>
+			<one-to-many class="Student" />
+		</set>
+		
+		
+		
+		<!-- courses属性，本类与Course的一对多 -->
+		<set name="courses">
+			<key column="teacher"></key>
+			<one-to-many class="Course" />
+		</set>
+
+	</class>
+</hibernate-mapping>

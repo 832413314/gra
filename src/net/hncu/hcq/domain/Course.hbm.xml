@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="net.hncu.hcq.domain">
+
+	<class name="Course" table="graduation_course">
+		<id name="id">
+			<!--ID我们自己给他加 把他的自动增加取消掉 <generator class="native" /> -->
+		</id>
+		<property name="name" />
+		<property name="description" />
+		<property name="beChoosed" />
+		<property name="isFull" />
+
+
+		<!-- student属性，本类与Student的一对一 -->
+
+		<many-to-one name="student" class="Student" column="student"></many-to-one>
+
+		<!-- teacher属性，本类与Teacher的多对一 -->
+		<many-to-one name="teacher" class="Teacher" column="teacher"></many-to-one>
+
+		<!-- grade属性，本类与Grade的一对一 -->
+		<many-to-one name="grade" class="Grade" column="grade" ></many-to-one>
+
+			<!-- suggestion属性，本类与Suggestion的一对一 -->
+		<many-to-one name="suggestion" class="Suggestion" column="suggestion" ></many-to-one>
+
+	</class>
+
+</hibernate-mapping>

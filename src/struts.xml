@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置为开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 把扩展名配置为action -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- 把主题配置为simple -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- 配置测试用的Action，未与Spring整合，class属性写类的全名 -->
+		<!-- 当Struts2与Spring整合后，class属性可以写bean的名称 -->
+
+		<!-- 文档下载 -->
+		<action name="fileDownload" class="fileDownloadAction">
+			<result name="success" type="stream">
+				<!--filename 是当你下载的时候显示的名字 // 有一个中文乱码异常 -->
+				<param name="contentDisposition">attachment;filename="${downLoadName}.doc"</param>
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+
+
+		<!-- teacherChoose -->
+		<action name="teacherChoose_*" class="teacherChooseAction"
+			method="{1}">
+			<result name="publishUI">/WEB-INF/jsp/teacherChoose/publishUI.jsp</result>
+			<result name="publish" type="redirectAction">teacherChoose_courseList</result>
+			<result name="chooseStuUI">/WEB-INF/jsp/teacherChoose/chooseStuUI.jsp
+			</result>
+			<result name="chooseStu" type="redirectAction">teacherChoose_courseList
+			</result>
+			<result name="courseList">/WEB-INF/jsp/teacherChoose/courseList.jsp
+			</result>
+			<result name="cancelChoose" type="redirectAction">teacherChoose_courseList
+			</result>
+			<result name="deleteCourse" type="redirectAction">teacherChoose_courseList
+			</result>
+			<result name="downloadDoc" type="stream">
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+
+
+		<!-- teacherProcess -->
+		<action name="teacherProcess_*" class="teacherProcessAction"
+			method="{1}">
+			<result name="openDocStuListUI">/WEB-INF/jsp/teacherProcess/openDocStuListUI.jsp
+			</result>
+			<result name="openDocCheckUI">/WEB-INF/jsp/teacherProcess/openDocCheckUI.jsp
+			</result>
+			<result name="openDocCheckDocUI">/WEB-INF/jsp/teacherProcess/openDocCheckDocUI.jsp
+			</result>
+
+			<!-- problem -->
+			<result name="openDocCheck">/WEB-INF/jsp/teacherProcess/openDocCheckUI.jsp
+			</result>
+
+			<result name="middleDocStuListUI">/WEB-INF/jsp/teacherProcess/middleDocStuListUI.jsp
+			</result>
+			<result name="middleDocCheckUI">/WEB-INF/jsp/teacherProcess/middleDocCheckUI.jsp
+			</result>
+			<result name="middleDocCheckDocUI">/WEB-INF/jsp/teacherProcess/middleDocCheckDocUI.jsp
+			</result>
+
+			<!-- problem -->
+			<result name="middleDocCheck">/WEB-INF/jsp/teacherProcess/middleDocCheckUI.jsp
+			</result>
+
+			<result name="thesisStuListUI">/WEB-INF/jsp/teacherProcess/thesisStuListUI.jsp
+			</result>
+			<result name="thesisCheckUI">/WEB-INF/jsp/teacherProcess/thesisCheckUI.jsp
+			</result>
+			<result name="thesisDocCheckDocUI">/WEB-INF/jsp/teacherProcess/thesisDocCheckDocUI.jsp
+			</result>
+			<result name="thesisCheck">/WEB-INF/jsp/userAction/thesisCheck.jsp</result>
+
+			<!-- 测试 -->
+			<result name="success">/WEB-INF/jsp/public/tSuccessPage.jsp</result>
+
+			<result name="downloadDoc" type="stream">
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+
+
+		<!-- teacherDefence -->
+		<action name="teacherDefence_*" class="teacherDefenceAction"
+			method="{1}">
+			<result name="stuListUI">/WEB-INF/jsp/teacherDefence/stuListUI.jsp
+			</result>
+			<result name="thesisCheckUI">/WEB-INF/jsp/teacherDefence/thesisCheckUI.jsp
+			</result>
+			<result name="thesisCheck">/WEB-INF/jsp/teacherDefence/stuListUI.jsp
+			</result>
+		</action>
+
+
+
+		<!-- teacherSecDefence -->
+		<action name="teacherSecDefence_*" class="teacherSecDefenceAction"
+			method="{1}">
+			<result name="stuListUI">/WEB-INF/jsp/teacherSecDefence/stuListUI.jsp
+			</result>
+			<result name="cStuListUI">/WEB-INF/jsp/teacherSecDefence/cStuListUI.jsp
+			</result>
+			<result name="thesisCheckUI">/WEB-INF/jsp/teacherSecDefence/thesisCheckUI.jsp
+			</result>
+			<result name="thesisCheck">/WEB-INF/jsp/teacherSecDefence/stuListUI.jsp
+			</result>
+		</action>
+
+		<!-- teacherInfo -->
+		<action name="teacherInfo_*" class="teacherInfoAction" method="{1}">
+			<result name="infoModifyUI">/WEB-INF/jsp/teacherInfo/infoModifyUI.jsp
+			</result>
+			<result name="infoModify">/WEB-INF/jsp/public/tSuccessPage.jsp
+			</result>
+			<result name="passwordModifyUI">/WEB-INF/jsp/teacherInfo/passwordModifyUI.jsp
+			</result>
+			<result name="passwordModify">/WEB-INF/jsp/public/tSuccessPage.jsp
+			</result>
+		</action>
+
+
+
+		<!-- studentChoose -->
+		<action name="studentChoose_*" class="studentChooseAction"
+			method="{1}">
+			<result name="chooseCourUI">/WEB-INF/jsp/studentChoose/chooseCourUI.jsp
+			</result>
+			<result name="chooseCour" type="redirectAction">studentChoose_myCourse
+			</result>
+			<result name="myCourse">/WEB-INF/jsp/studentChoose/myCourse.jsp</result>
+			<result name="teacherInfo">/WEB-INF/jsp/studentChoose/teacherInfo.jsp
+			</result>
+		</action>
+
+
+		<!-- studentProcess -->
+		<action name="studentProcess_*" class="studentProcessAction"
+			method="{1}">
+			<result name="openDocSubUI">/WEB-INF/jsp/studentProcess/openDocSubUI.jsp
+			</result>
+			<result name="openDocSub">/WEB-INF/jsp/public/sSuccessPage.jsp
+			</result>
+
+			<result name="middleDocSubUI">/WEB-INF/jsp/studentProcess/middleDocSubUI.jsp
+			</result>
+			<result name="middleDocSub">/WEB-INF/jsp/public/sSuccessPage.jsp
+			</result>
+
+			<result name="thesisDocSubUI">/WEB-INF/jsp/studentProcess/thesisDocSubUI.jsp
+			</result>
+			<result name="thesisDocSub">/WEB-INF/jsp/public/sSuccessPage.jsp
+			</result>
+			<result name="gradeList">/WEB-INF/jsp/studentProcess/gradeList.jsp
+			</result>
+			<result name="thesisGrade">/WEB-INF/jsp/studentProcess/thesisGrade.jsp
+			</result>
+			<result name="openGradeError">/WEB-INF/jsp/studentProcess/openGradeError.jsp
+			</result>
+			<result name="middleGradeError">/WEB-INF/jsp/studentProcess/middleGradeError.jsp
+			</result>
+
+		</action>
+
+
+		<!-- studentDefence -->
+		<action name="studentDefence_*" class="studentDefenceAction"
+			method="{1}">
+			<result name="gradeList">/WEB-INF/jsp/studentDefence/gradeList.jsp
+			</result>
+			<result name="defenceTime">/WEB-INF/jsp/studentDefence/defenceTime.jsp
+			</result>
+		</action>
+
+		<!-- studentSecDefence -->
+		<action name="studentSecDefence_*" class="studentSecDefenceAction"
+			method="{1}">
+			<result name="secDefenceSubUI">/WEB-INF/jsp/studentSecDefence/secDefenceSubUI.jsp
+			</result>
+			<result name="secDefenceSub">/WEB-INF/jsp/studentSecDefence/saveUI.jsp
+			</result>
+			<result name="secondGrade">/WEB-INF/jsp/studentSecDefence/secondGrade.jsp
+			</result>
+		</action>
+
+
+		<!-- studentInfo -->
+		<action name="studentInfo_*" class="studentInfoAction" method="{1}">
+			<result name="infoModifyUI">/WEB-INF/jsp/studentInfo/infoModifyUI.jsp
+			</result>
+			<result name="infoModify">/WEB-INF/jsp/public/sSuccessPage.jsp
+			</result>
+			<result name="passwordModifyUI">/WEB-INF/jsp/studentInfo/passwordModifyUI.jsp
+			</result>
+			<result name="passwordModify">/WEB-INF/jsp/public/sSuccessPage.jsp
+			</result>
+		</action>
+
+
+
+
+
+		<!-- teacher首页 -->
+		<action name="sHome_*" class="sHomeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/sHomeAction/index.jsp</result>
+			<result name="top">/WEB-INF/jsp/sHomeAction/top.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/sHomeAction/bottom.jsp</result>
+			<result name="left">/WEB-INF/jsp/sHomeAction/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/sHomeAction/right.jsp</result>
+			<result name="loginUI">/loginUI.jsp</result>
+			<result name="logout" type="redirectAction">sHome_index</result>
+			<result name="toIndex" type="redirectAction">sHome_index</result>
+		</action>
+
+
+		<!-- teacher首页 -->
+		<action name="tHome_*" class="tHomeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/tHomeAction/index.jsp</result>
+			<result name="top">/WEB-INF/jsp/tHomeAction/top.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/tHomeAction/bottom.jsp</result>
+			<result name="left">/WEB-INF/jsp/tHomeAction/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/tHomeAction/right.jsp</result>
+			<result name="loginUI">/loginUI.jsp</result>
+			<result name="logout" type="redirectAction">tHome_index</result>
+			<result name="toIndex" type="redirectAction">tHome_index</result>
+		</action>
+
+		<!-- administrator首页 -->
+		<action name="aHome_*" class="aHomeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/aHomeAction/index.jsp</result>
+			<result name="top">/WEB-INF/jsp/aHomeAction/top.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/aHomeAction/bottom.jsp</result>
+			<result name="left">/WEB-INF/jsp/aHomeAction/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/aHomeAction/right.jsp</result>
+			<result name="loginUI">/loginUI.jsp</result>
+			<result name="logout" type="redirectAction">aHome_index</result>
+			<result name="toIndex" type="redirectAction">aHome_index</result>
+		</action>
+
+		<!-- 首页 -->
+		<action name="home_*" class="homeAction" method="{1}">
+			<result name="index">/WEB-INF/jsp/homeAction/index.jsp</result>
+			<result name="top">/WEB-INF/jsp/homeAction/top.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/homeAction/bottom.jsp</result>
+			<result name="left">/WEB-INF/jsp/homeAction/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/homeAction/right.jsp</result>
+			<result name="logout" type="redirectAction">home_index</result>
+			<result name="toIndex" type="redirectAction">home_index</result>
+			<result name="loginUI">/WEB-INF/jsp/homeAction/loginUI.jsp</result>
+		</action>
+
+		<!--<action name="home_login" class="homeAction" method="login">-->
+			<!--<result name="login" >/WEB-INF/jsp/homeAction/right.jsp</result>-->
+		<!--</action>-->
+
+		<!-- adminAction -->
+		<action name="adminAction_*" class="adminAction" method="{1}">
+			<result name="addStuUI">/WEB-INF/jsp/adminAction/addStuUI.jsp
+			</result>
+			<result name="addTeacherUI">/WEB-INF/jsp/adminAction/addTeacherUI.jsp
+			</result>
+			<result name="addStu">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+			<result name="addTeacher">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+			<result name="courseList">/WEB-INF/jsp/adminAction/courseList.jsp
+			</result>
+			<result name="studentList">/WEB-INF/jsp/adminAction/studentList.jsp
+			</result>
+			<result name="teacherList">/WEB-INF/jsp/adminAction/teacherList.jsp
+			</result>
+			<result name="studentChooseInfo">/WEB-INF/jsp/adminAction/studentChooseInfo.jsp
+			</result>
+			<result name="gradeManage">/WEB-INF/jsp/adminAction/gradeManage.jsp
+			</result>
+			<result name="docuSearchUI">/WEB-INF/jsp/adminAction/docuSearchUI.jsp
+			</result>
+			<result name="publishNoticeUI">/WEB-INF/jsp/adminAction/publishNoticeUI.jsp
+			</result>
+			<result name="publishNotice">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+			<result name="noticeModifyUI">/WEB-INF/jsp/adminAction/noticeModifyUI.jsp
+			</result>
+			<result name="noticeModify">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+			<result name="noticeDelete">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+
+			<result name="teacherInfoModifyUI">/WEB-INF/jsp/adminAction/teacherInfoModifyUI.jsp
+			</result>
+			<result name="teacherInfoModify">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+			<result name="studentInfoModifyUI">/WEB-INF/jsp/adminAction/studentInfoModifyUI.jsp
+			</result>
+			<result name="studentInfoModify">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+			<result name="courseInfoModifyUI">/WEB-INF/jsp/adminAction/courseInfoModifyUI.jsp
+			</result>
+			<result name="courseInfoModify">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+			<result name="passwordModifyUI">/WEB-INF/jsp/adminAction/passwordModifyUI.jsp
+			</result>
+			<result name="passwordModify">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+			<result name="materialInputList">/WEB-INF/jsp/adminAction/materialInputList.jsp
+			</result>
+			<result name="materialInputUI">/WEB-INF/jsp/adminAction/materialInputUI.jsp
+			</result>
+			<result name="materialInput">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+
+			<result name="defenceInputList">/WEB-INF/jsp/adminAction/defenceInputList.jsp
+			</result>
+			<result name="defenceInputUI">/WEB-INF/jsp/adminAction/defenceInputUI.jsp
+			</result>
+			<result name="defenceInput">/WEB-INF/jsp/public/aSuccessPage.jsp
+			</result>
+		</action>
+
+	</package>
+	<!-- Add packages here -->
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
